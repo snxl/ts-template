@@ -35,6 +35,7 @@
         }
         ],
         "class-methods-use-this": "off",
+        "no-plusplus": [2, { "allowForLoopAfterthoughts": true }],
         "import/prefer-default-export": "off",
         "no-shadow": "off",
         "no-console": "off",
