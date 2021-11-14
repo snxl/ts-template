@@ -1,10 +1,12 @@
-import cors from "cors";
-import dotenv from "dotenv";
-import express, { Express } from "express";
-import logger from "morgan";
-import path from "path";
+import cors from 'cors';
+import dotenv from 'dotenv';
+import express, { Express } from 'express';
+import logger from 'morgan';
+import path from 'path';
 
-import Route from "./routes/index.routes";
+import Route from './routes/index.routes';
+
+import './database';
 
 dotenv.config();
 
@@ -19,10 +21,10 @@ export class App {
 
     middlewares() {
         this.app.use(cors());
-        this.app.use(logger("dev"));
+        this.app.use(logger('dev'));
         this.app.use(express.json());
         this.app.use(express.urlencoded({ extended: false }));
-        this.app.use(express.static(path.join(__dirname, "src/public")));
+        this.app.use(express.static(path.join(__dirname, 'src/public')));
     }
 
     routes() {
