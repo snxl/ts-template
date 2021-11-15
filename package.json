@@ -13,7 +13,7 @@
     "typeorm": "^0.2.40"
   },
   "scripts": {
-    "dev": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules --respawn src/bin/www.ts",
+    "dev": "ts-node-dev --inspect --poll --transpile-only --ignore-watch node_modules --respawn src/bin/www.ts",
     "test": "jest"
   },
   "devDependencies": {
