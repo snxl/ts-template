@@ -6,7 +6,7 @@ import path from 'path';
 
 import Route from './routes/index.routes';
 
-import './database';
+// import './database';
 
 dotenv.config();
 

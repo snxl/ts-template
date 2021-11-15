@@ -1,4 +1,4 @@
-import { Router, IRouter } from "express";
+import { Router, IRouter } from 'express';
 
 export default new (class Route {
     public router: IRouter;
@@ -8,8 +8,8 @@ export default new (class Route {
     }
 
     main() {
-        this.router.post("/", (req, res) => {
-            res.json("Hello World");
+        this.router.post('/', (req, res) => {
+            res.json('Hello World');
         });
     }
 })();
