@@ -12,6 +12,9 @@
     "reflect-metadata": "^0.1.13",
     "typeorm": "^0.2.40"
   },
+  "engines": {
+      "node": ">=16.x"
+  },
   "scripts": {
     "dev": "ts-node-dev --inspect --poll --transpile-only --ignore-watch node_modules --respawn src/bin/www.ts",
     "test": "jest"
