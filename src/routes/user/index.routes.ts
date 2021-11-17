@@ -1,7 +1,5 @@
 import { Router, IRouter } from 'express';
 
-import routeUser from './user/index.routes';
-
 export default new (class Route {
     public router: IRouter;
     constructor() {
@@ -10,6 +8,8 @@ export default new (class Route {
     }
 
     main() {
-        this.router.use('/v1', routeUser.router);
+        this.router.post('/', (req, res) => {
+            res.json('hello world');
+        });
     }
 })();
