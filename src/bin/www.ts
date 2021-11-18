@@ -47,5 +47,5 @@ if (cluster.isPrimary) {
         serverSsl.listen(portTls, () =>
             process.stdout.write(`\n SERVER HTTPS RUNNING IN PORT: ${portTls}\nhttps://localhost:${portTls}\n\n`)
         );
-    }, 2000);
+    }, 1000);
 }
