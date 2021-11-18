@@ -17,7 +17,8 @@
   },
   "scripts": {
     "dev": "ts-node-dev --inspect --poll --transpile-only --ignore-watch node_modules --respawn src/bin/www.ts",
-    "test": "jest"
+    "test": "jest",
+    "typeorm":"ts-node-dev ./node_modules/typeorm/cli"
   },
   "devDependencies": {
     "@types/express": "^4.17.13",
