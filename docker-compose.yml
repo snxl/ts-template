@@ -21,6 +21,8 @@ services:
         command: redis-server --requirepass docker
         ports:
             - "6379:6379"
+        environment:
+          - REDIS_REPLICATION_MODE=master
         restart: always
         volumes:
           - redis_data:/data/redis
