@@ -27,6 +27,26 @@ services:
         volumes:
           - redis_data:/data/redis
 
+    mongo:
+        image: mongo
+        container_name: database_mongo
+        restart: always
+        ports:
+          - ${DB_PORT}:27017
+        environment:
+            - MONGO_INITDB_DATABASE=${MONGO_DATABASE}
+            - MONGO_INITDB_ROOT_USERNAME=${MONGO_USERNAME}
+            - MONGO_INITDB_ROOT_PASSWORD=${MONGO_PASSWORD}
+
+    mongo-express:
+        image: mongo-express
+        restart: always
+        ports:
+            - 8081:8081
+        environment:
+            - ME_CONFIG_MONGODB_ADMINUSERNAME=root
+            - ME_CONFIG_MONGODB_ADMINPASSWORD=example
+            - ME_CONFIG_MONGODB_URL=mongodb://root:docker@mongo:27017/
     app:
         build: .
         command: yarn dev
