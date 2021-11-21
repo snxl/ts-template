@@ -16,6 +16,12 @@ services:
         extra_hosts:
             - "host.docker.internal:172.17.0.1"
 
+    redis:
+        image: redis
+        command: redis-server --requirepass docker
+        ports:
+            - "6379:6379"
+
     app:
         build: .
         command: yarn dev
@@ -28,8 +34,12 @@ services:
             - /usr/app/node_modules
         depends_on:
             - database_postgres
+            - redis
         environment:
-          - DB_URL=postgresql://docker:docker@database_postgres:5432/docker
+            - REDIS_HOST=redis
+            - REDIS_PORT=6379
+            - REDIS_PASSWORD=docker
+            - DB_URL=postgresql://docker:docker@database_postgres:5432/docker
 
 
 volumes:
