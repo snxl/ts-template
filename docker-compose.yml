@@ -6,13 +6,15 @@ services:
         container_name: database_postgres
         restart: always
         ports:
-          - "5432:5432"
+            - "5432:5432"
         environment:
-          - POSTGRES_USER=docker
-          - POSTGRES_PASSWORD=docker
-          - POSTGRES_DB=docker
+            - POSTGRES_USER=docker
+            - POSTGRES_PASSWORD=docker
+            - POSTGRES_DB=docker
         volumes:
             - pgdata:/data/postgres
+        extra_hosts:
+            - "host.docker.internal:172.17.0.1"
 
     app:
         build: .
@@ -23,7 +25,11 @@ services:
             - "5000:8080"
         volumes:
             - .:/usr/app
-
+            - /usr/app/node_modules
+        depends_on:
+            - database_postgres
+        environment:
+          - DB_URL=postgresql://docker:docker@database_postgres:5432/docker
 
 
 volumes:

@@ -6,9 +6,11 @@ ENV PORT=8080 PORT_TLS=5050
 
 COPY package*.json ./
 
+RUN apk add --no-cache bash
 RUN npm install -g npm@8.1.3
 RUN npm install -g yarn --force
 RUN yarn
+
 
 COPY . .
 
