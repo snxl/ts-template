@@ -21,6 +21,9 @@ services:
         command: redis-server --requirepass docker
         ports:
             - "6379:6379"
+        restart: always
+        volumes:
+          - redis_data:/data/redis
 
     app:
         build: .
@@ -41,7 +44,8 @@ services:
             - REDIS_PASSWORD=docker
             - DB_URL=postgresql://docker:docker@database_postgres:5432/docker
 
-
 volumes:
     pgdata:
+        driver: local
+    redis_data:
         driver: local
