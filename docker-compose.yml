@@ -18,6 +18,7 @@ services:
 
     redis:
         image: redis
+        container_name: database_redis
         command: redis-server --requirepass docker
         ports:
             - "6379:6379"
