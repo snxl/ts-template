@@ -69,6 +69,11 @@ services:
             - REDIS_PORT=6379
             - REDIS_PASSWORD=docker
             - DB_URL=postgresql://docker:docker@database_postgres:5432/docker
+        logging:
+            driver: "json-file"
+            options:
+                max-size: "10m"
+                max-file: "5"
 
 volumes:
     pgdata:
