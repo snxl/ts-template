@@ -1,4 +1,4 @@
-include ./src/.env
+include .env
 
 .PHONY: build
 
