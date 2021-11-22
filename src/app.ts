@@ -14,7 +14,9 @@ import Route from './routes/index.routes';
 dotenv.config();
 
 export class App {
-    constructor(private app: Application) {
+    private app: Application;
+
+    constructor() {
         this.app = express();
         this.middlewares();
         this.routes();

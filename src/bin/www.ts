@@ -7,18 +7,18 @@ import path from 'path';
 
 import { App } from '../app';
 
-const entry = new App();
+const serverApp = new App().getApp();
 
 const port = process.env.PORT || '8080';
 const portTls = process.env.PORT_TLS || '465';
 
-const server = http.createServer(entry.app);
+const server = http.createServer(serverApp);
 const serverSsl = https.createServer(
     {
         key: fs.readFileSync(path.join(__dirname, '../certificate/selfsigned.key'), 'utf-8'),
         cert: fs.readFileSync(path.join(__dirname, '../certificate/selfsigned.crt'), 'utf-8'),
     },
-    entry.app
+    serverApp
 );
 
 if (cluster.isPrimary) {
