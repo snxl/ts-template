@@ -1,18 +1,19 @@
 import cluster from 'cluster';
+import { Application } from 'express';
 import fs from 'fs';
-import http from 'http';
+import http, { Server } from 'http';
 import https from 'https';
 import os from 'os';
 import path from 'path';
 
 import { App } from '../app';
 
-class Server {
-    private serverApp;
-    private port;
-    private portTls;
-    private server;
-    private serverSsl;
+class ServerBin {
+    private serverApp: Application;
+    private port: string;
+    private portTls: string;
+    private server: Server;
+    private serverSsl: Server;
 
     constructor() {
         this.cluster();
@@ -71,4 +72,4 @@ class Server {
     }
 }
 
-new Server();
+new ServerBin();

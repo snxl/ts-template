@@ -29,3 +29,8 @@ logs:
 
 bash:
 	docker-compose exec app bash
+
+.PHONY: remove-images
+
+remove-images:
+	docker system prune -a --volumes
