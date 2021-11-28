@@ -6,11 +6,11 @@ services:
         container_name: database_postgres
         restart: always
         ports:
-            - "5432:5432"
+            - "${POSTGRES_PORT}:${POSTGRES_PORT}"
         environment:
-            - POSTGRES_USER=docker
-            - POSTGRES_PASSWORD=docker
-            - POSTGRES_DB=docker
+            - POSTGRES_USER=${POSTGRES_USER}
+            - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+            - POSTGRES_DB=${POSTGRES_DB}
         volumes:
             - pgdata:/data/postgres
         extra_hosts:
@@ -19,11 +19,11 @@ services:
     redis:
         image: redis
         container_name: database_redis
-        command: redis-server --requirepass docker
+        command: redis-server --requirepass ${REDIS_PASSWORD}
         ports:
-            - "6379:6379"
+            - "${REDIS_PORT}:${REDIS_PORT}"
         environment:
-          - REDIS_REPLICATION_MODE=master
+          - REDIS_REPLICATION_MODE=${REDIS_REPLICATION_MODE}
         restart: always
         volumes:
           - redis_data:/data/redis
@@ -33,7 +33,7 @@ services:
         container_name: database_mongo
         restart: always
         ports:
-          - ${MONGO_PORT}:27017
+          - ${MONGO_PORT}:${MONGO_PORT}
         environment:
             - MONGO_INITDB_DATABASE=${MONGO_DATABASE}
             - MONGO_INITDB_ROOT_USERNAME=${MONGO_USERNAME}
@@ -44,8 +44,8 @@ services:
         command: ["./wait-for-it.sh", "database_postgres:5432", "redis:6379", "mongo:27017", "--", "yarn", "dev"]
         container_name: node_service
         ports:
-            - "3000:5050"
-            - "5000:8080"
+            - "3000:${PORT_TLS}"
+            - "5000:${PORT}"
         volumes:
             - .:/usr/app
             - /usr/app/node_modules
@@ -54,10 +54,7 @@ services:
             - redis
             - mongo
         environment:
-            - REDIS_HOST=redis
-            - REDIS_PORT=6379
-            - REDIS_PASSWORD=docker
-            - DB_URL=postgresql://docker:docker@database_postgres:5432/docker
+            - DB_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@database_postgres:${POSTGRES_PORT}/${POSTGRES_DB}
             - MONGO_URL://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOST}/${MONGO_DATABASE}
         logging:
             driver: "json-file"

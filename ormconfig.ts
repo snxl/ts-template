@@ -10,8 +10,8 @@ export default (() => {
         entities: ['./src/infra/database/postgres/entities/*.ts'],
         migrations: ['./src/infra/database/postgres/migrations/*.ts'],
         cli: {
-            entitiesDir: './src/entities',
-            migrationsDir: './src/database/migrations',
+            entitiesDir: './src/infra/database/postgres/entities',
+            migrationsDir: './src/infra/database/postgres/migrations',
         },
     };
 })();

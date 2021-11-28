@@ -2,8 +2,6 @@ FROM node:alpine
 
 WORKDIR /usr/app
 
-ENV PORT=8080 PORT_TLS=5050
-
 COPY package*.json ./
 
 COPY wait-for-it.sh /wait-for-it.sh
