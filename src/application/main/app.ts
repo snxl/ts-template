@@ -7,9 +7,9 @@ import path from 'path';
 
 import 'express-async-errors';
 
-import './database/postgres';
+import '../../infra/database/postgres';
 
-import Route from './routes/index.routes';
+import Route from '../routes/index.routes';
 
 dotenv.config();
 

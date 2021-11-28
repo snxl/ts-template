@@ -31,8 +31,8 @@ class ServerBin {
     private createServerTls(app) {
         this.serverSsl = https.createServer(
             {
-                key: fs.readFileSync(path.join(__dirname, '../certificate/selfsigned.key'), 'utf-8'),
-                cert: fs.readFileSync(path.join(__dirname, '../certificate/selfsigned.crt'), 'utf-8'),
+                key: fs.readFileSync(path.join(__dirname, '../../certificate/selfsigned.key'), 'utf-8'),
+                cert: fs.readFileSync(path.join(__dirname, '../../certificate/selfsigned.crt'), 'utf-8'),
             },
             app
         );
@@ -56,20 +56,24 @@ class ServerBin {
                 }
             });
         } else {
-            console.log(`\nProcess id: ${process.pid}\n`);
-
-            setTimeout(() => {
-                this.server.listen(this.port, () =>
-                    process.stdout.write(`\n SERVER HTTP RUNNING IN PORT: ${this.port}\nhttp://localhost:${this.port} \n\n`)
-                );
-                this.serverSsl.listen(this.portTls, () =>
-                    process.stdout.write(
-                        `\n SERVER HTTPS RUNNING IN PORT: ${this.portTls}\nhttps://localhost:${this.portTls}\n\n`
-                    )
-                );
-            }, 1000);
+            this.listner();
         }
     }
+
+    private listner() {
+        console.log(`\nProcess id: ${process.pid}\n`);
+
+        setTimeout(() => {
+            this.server.listen(this.port, () =>
+                process.stdout.write(`\nSERVER HTTP RUNNING IN PORT: ${this.port}\nhttp://localhost:${this.port} \n`)
+            );
+            this.serverSsl.listen(this.portTls, () =>
+                process.stdout.write(`\nSERVER HTTPS RUNNING IN PORT: ${this.portTls}\nhttps://localhost:${this.portTls}\n`)
+            );
+        }, 1000);
+    }
+
+    // private kill() {}
 }
 
 new ServerBin();

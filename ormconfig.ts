@@ -7,8 +7,8 @@ export default (() => {
         type: 'postgres',
         url: process.env.DB_URL,
         ssl: false,
-        entities: ['./src/database/postgres/entities/*.ts'],
-        migrations: ['./src/database/postgres/migrations/*.ts'],
+        entities: ['./src/infra/database/postgres/entities/*.ts'],
+        migrations: ['./src/infra/database/postgres/migrations/*.ts'],
         cli: {
             entitiesDir: './src/entities',
             migrationsDir: './src/database/migrations',

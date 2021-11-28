@@ -41,7 +41,7 @@ services:
 
     app:
         build: .
-        command: yarn dev
+        command: ["./wait-for-it.sh", "database_postgres:5432", "redis:6379", "mongo:27017", "--", "yarn", "dev"]
         container_name: node_service
         ports:
             - "3000:5050"
