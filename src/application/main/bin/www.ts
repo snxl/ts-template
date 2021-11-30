@@ -6,6 +6,7 @@ import https from 'https';
 import os from 'os';
 import path from 'path';
 
+import shutdown from '../../../shared/helpers/shutdown';
 import { App } from '../app';
 
 class ServerBin {
@@ -22,13 +23,14 @@ class ServerBin {
         this.portTls = process.env.PORT_TLS || '465';
         this.createServer(this.serverApp);
         this.createServerTls(this.serverApp);
+        this.kill();
     }
 
-    private createServer(app) {
+    private createServer(app: Application) {
         this.server = http.createServer(app);
     }
 
-    private createServerTls(app) {
+    private createServerTls(app: Application) {
         this.serverSsl = https.createServer(
             {
                 key: fs.readFileSync(path.join(__dirname, '../../certificate/selfsigned.key'), 'utf-8'),
@@ -42,8 +44,8 @@ class ServerBin {
         if (cluster.isPrimary) {
             const number_of_cpus = os.cpus().length;
 
-            console.log(`\nMaster ${process.pid} is running\n`);
-            console.log(`\nForking Server for ${number_of_cpus} CPUs\n`);
+            process.stdout.write(`\nMaster ${process.pid} is running\n`);
+            process.stdout.write(`\nForking Server for ${number_of_cpus} CPUs\n`);
 
             for (let index = 0; index < number_of_cpus; index++) {
                 cluster.fork();
@@ -51,7 +53,7 @@ class ServerBin {
 
             cluster.on('exit', (worker, code) => {
                 if (code !== 0 && !worker.exitedAfterDisconnect) {
-                    console.log(`\nWorker ${worker.process.pid} died\n`);
+                    process.stdout.write(`\nWorker ${worker.process.pid} died\n`);
                     cluster.fork();
                 }
             });
@@ -61,7 +63,7 @@ class ServerBin {
     }
 
     private listner() {
-        console.log(`\nProcess id: ${process.pid}\n`);
+        process.stdout.write(`\nProcess id: ${process.pid}\n`);
 
         setTimeout(() => {
             this.server.listen(this.port, () =>
@@ -73,7 +75,9 @@ class ServerBin {
         }, 1000);
     }
 
-    // private kill() {}
+    private kill() {
+        process.on('SIGINT', shutdown).on('SIGTERM', shutdown);
+    }
 }
 
 new ServerBin();

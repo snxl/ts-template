@@ -7,8 +7,8 @@ import { createClient } from 'redis';
         url: process.env.REDIS_URL,
     });
 
-    client.on('error', (err) => console.log('Redis Client Error', err));
-    client.on('connect', () => console.log('Redis connect'));
+    client.on('error', (err) => process.stdout.write(`Redis Client Error: ${err}`));
+    client.on('connect', () => process.stdout.write(`Redis connect`));
 
     await client.connect();
 })();

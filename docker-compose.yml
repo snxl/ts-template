@@ -41,6 +41,7 @@ services:
 
     app:
         build: .
+        restart: always
         command: ["yarn", "dev"]
         container_name: node_service
         ports:
