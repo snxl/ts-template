@@ -1,4 +1,4 @@
-import '../../../shared/config/moduleAlias';
+import '../../shared/config/moduleAlias';
 
 import cluster from 'cluster';
 import { Application } from 'express';
@@ -35,8 +35,8 @@ class ServerBin {
     private createServerTls(app: Application) {
         this.serverSsl = https.createServer(
             {
-                key: fs.readFileSync(path.join(__dirname, '../../certificate/selfsigned.key'), 'utf-8'),
-                cert: fs.readFileSync(path.join(__dirname, '../../certificate/selfsigned.crt'), 'utf-8'),
+                key: fs.readFileSync(path.join(__dirname, '../certificate/selfsigned.key'), 'utf-8'),
+                cert: fs.readFileSync(path.join(__dirname, '../certificate/selfsigned.crt'), 'utf-8'),
             },
             app
         );
