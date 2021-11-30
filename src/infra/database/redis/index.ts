@@ -1,14 +1,16 @@
 import { createClient } from 'redis';
 
-(async () => {
-    console.log(process.env.REDIS_URL);
+import config from '../../../shared/config/keys';
 
+(async () => {
     const client = createClient({
-        url: process.env.REDIS_URL,
+        url: config.redis_url,
     });
 
-    client.on('error', (err) => process.stdout.write(`Redis Client Error: ${err}`));
-    client.on('connect', () => process.stdout.write(`Redis connect`));
+    setTimeout(async () => {
+        client.on('error', (err) => process.stdout.write(`Redis Client Error: ${err}\n`));
+        client.on('connect', () => process.stdout.write(`Redis connect in: ${config.pid}\n`));
 
-    await client.connect();
+        await client.connect();
+    }, 500);
 })();

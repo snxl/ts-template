@@ -95,7 +95,12 @@
 
     /* Completeness */
     // "skipDefaultLibCheck": true,                      /* Skip type checking .d.ts files that are included with TypeScript. */
-    "skipLibCheck": true                                /* Skip type checking all .d.ts files. */
+    "skipLibCheck": true,
+    "baseUrl": "./",
+    "paths": {
+        "@src/*": ["./src/*"],
+        "@test/*": ["./test/*"]
+    },                           /* Skip type checking all .d.ts files. */
   },
   "exclude": [
     "./node_modules/*",

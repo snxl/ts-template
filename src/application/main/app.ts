@@ -1,3 +1,5 @@
+import '../../shared/config/moduleAlias';
+
 import cors from 'cors';
 import dotenv from 'dotenv';
 import express, { Application } from 'express';
@@ -10,12 +12,12 @@ import 'express-async-errors';
 import '../../infra/database/postgres';
 import '../../infra/database/redis';
 
-import Route from '../routes/index.routes';
+import Route from '@src/application/routes/index.routes';
 
 dotenv.config();
 
 export class App {
-    private app: Application;
+    readonly app: Application;
 
     constructor() {
         this.app = express();
