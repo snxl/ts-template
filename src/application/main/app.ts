@@ -9,8 +9,8 @@ import path from 'path';
 
 import 'express-async-errors';
 
-import '../../infra/database/postgres';
-import '../../infra/database/redis';
+import '@src/infra/database/postgres';
+import '@src/infra/database/redis';
 
 import Route from '@src/application/routes/index.routes';
 

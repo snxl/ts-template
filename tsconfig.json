@@ -100,7 +100,11 @@
     "paths": {
         "@src/*": ["./src/*"],
         "@test/*": ["./test/*"]
-    },                           /* Skip type checking all .d.ts files. */
+    },
+    "rootDirs": [
+        "./src",
+        "./test"
+    ],                       /* Skip type checking all .d.ts files. */
   },
   "exclude": [
     "./node_modules/*",

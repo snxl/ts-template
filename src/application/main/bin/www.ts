@@ -23,7 +23,7 @@ class ServerBin {
         this.portTls = process.env.PORT_TLS || '465';
         this.createServer(this.serverApp);
         this.createServerTls(this.serverApp);
-        // this.kill();
+        this.kill();
     }
 
     private createServer(app: Application) {
@@ -76,7 +76,7 @@ class ServerBin {
     }
 
     private kill() {
-        process.on('SIGINT', shutdown).on('SIGTERM', shutdown);
+        process.on('SIGINT', (signal) => shutdown(signal)).on('SIGTERM', (signal) => shutdown(signal));
     }
 }
 
