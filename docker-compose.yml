@@ -55,7 +55,8 @@ services:
             - mongo
         environment:
             - DB_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@database_postgres:${POSTGRES_PORT}/${POSTGRES_DB}
-            - MONGO_URL://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOST}/${MONGO_DATABASE}
+            - MONGO_URL=mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOST}/${MONGO_DATABASE}
+            - REDIS_URL=redis://default:${REDIS_PASSWORD}@redis:${REDIS_PORT}
         logging:
             driver: "json-file"
             options:

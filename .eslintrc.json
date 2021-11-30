@@ -62,7 +62,8 @@
         { "devDependencies": ["**/*.spec.js"] }
         ],
         "prettier/prettier": "error",
-        "no-new": "off"
+        "no-new": "off",
+        "@typescript-eslint/no-explicit-any": "off"
     },
     "settings": {
         "import/resolver": {

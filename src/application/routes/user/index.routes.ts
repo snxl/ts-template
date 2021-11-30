@@ -1,5 +1,7 @@
 import { Router, IRouter } from 'express';
 
+import { user } from '../../controller/user/createUserController';
+
 export default new (class Route {
     public router: IRouter;
     constructor() {
@@ -8,8 +10,6 @@ export default new (class Route {
     }
 
     main() {
-        this.router.post('/', (req, res) => {
-            res.json('hello world');
-        });
+        this.router.post('/', user.store);
     }
 })();
