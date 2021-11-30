@@ -1,7 +1,10 @@
 import config from '../config/keys/index';
 
 export default function shutdown(signal: any): void {
-    if (config.NODE_ENV !== 'production') process.exit(0);
+    if (config.NODE_ENV !== 'production') {
+        process.stdout.write(`\nexiting\n`);
+        process.exit(0);
+    }
 
     const timeOut = 25 * 10000;
 

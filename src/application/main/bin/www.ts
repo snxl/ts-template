@@ -1,3 +1,5 @@
+import '../../../shared/config/moduleAlias';
+
 import cluster from 'cluster';
 import { Application } from 'express';
 import fs from 'fs';
@@ -6,7 +8,8 @@ import https from 'https';
 import os from 'os';
 import path from 'path';
 
-import shutdown from '../../../shared/helpers/shutdown';
+import shutdown from '@src/shared/helpers/shutdown';
+
 import { App } from '../app';
 
 class ServerBin {
