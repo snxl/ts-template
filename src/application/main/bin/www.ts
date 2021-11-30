@@ -8,9 +8,8 @@ import https from 'https';
 import os from 'os';
 import path from 'path';
 
+import { App } from '@src/application/main/app';
 import shutdown from '@src/shared/helpers/shutdown';
-
-import { App } from '../app';
 
 class ServerBin {
     private serverApp: Application;
