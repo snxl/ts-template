@@ -1,9 +1,11 @@
+import IEnvs from '@src/domain/repositories';
+
 import development from './development';
 import production from './production';
 
 const { NODE_ENV } = process.env;
 
-let env;
+let env: IEnvs;
 
 switch (NODE_ENV) {
     case 'production':
