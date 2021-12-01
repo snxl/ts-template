@@ -39,7 +39,7 @@ export class App {
     }
 
     private routes() {
-        this.app.use(Route.router);
+        this.app.use('/api', Route.router);
     }
 
     public getApp() {
