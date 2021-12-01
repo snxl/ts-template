@@ -3,8 +3,8 @@ import { Request, Response } from 'express';
 import BaseSchema from '../../baseSchema';
 
 class User {
-    store(req: Request, res: Response) {
-        return null;
+    async store(req: Request, res: Response): Promise<Response> {
+        return await res.status(200).json({ status: 'ok' });
     }
 }
 

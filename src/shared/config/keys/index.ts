@@ -1,4 +1,4 @@
-import IEnvs from '@src/domain/repositories';
+import IEnvs from '@src/domain/repositories/IEnvsRepository';
 
 import development from './development';
 import production from './production';

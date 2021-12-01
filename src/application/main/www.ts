@@ -9,6 +9,7 @@ import os from 'os';
 import path from 'path';
 
 import { App } from '@src/application/main/app';
+import config from '@src/shared/config/keys';
 import shutdown from '@src/shared/helpers/shutdown';
 
 class ServerBin {
@@ -21,8 +22,8 @@ class ServerBin {
     constructor() {
         this.cluster();
         this.serverApp = new App().getApp();
-        this.port = process.env.PORT || '8080';
-        this.portTls = process.env.PORT_TLS || '465';
+        this.port = config.port || '8080';
+        this.portTls = config.port_tls || '465';
         this.createServer(this.serverApp);
         this.createServerTls(this.serverApp);
         this.kill();
@@ -46,7 +47,7 @@ class ServerBin {
         if (cluster.isPrimary) {
             const number_of_cpus = os.cpus().length;
 
-            process.stdout.write(`\nMaster ${process.pid} is running\n`);
+            process.stdout.write(`\nMaster ${config.pid} is running\n`);
             process.stdout.write(`\nForking Server for ${number_of_cpus} CPUs\n`);
 
             for (let index = 0; index < number_of_cpus; index++) {
@@ -65,7 +66,7 @@ class ServerBin {
     }
 
     private listner() {
-        process.stdout.write(`\nProcess id: ${process.pid}\n`);
+        process.stdout.write(`\nProcess id: ${config.pid}\n`);
 
         setTimeout(() => {
             this.server.listen(this.port, () =>

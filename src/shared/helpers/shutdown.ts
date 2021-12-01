@@ -1,6 +1,6 @@
 import config from '../config/keys/index';
 
-export default function shutdown(signal: any): void {
+export default function shutdown(signal: string): void {
     if (config.NODE_ENV !== 'production') {
         process.stdout.write(`\nexiting\n`);
         process.exit(0);

@@ -10,6 +10,6 @@ export default new (class Route {
     }
 
     main() {
-        this.router.post('/', user.store);
+        this.router.post('/user', user.store);
     }
 })();
