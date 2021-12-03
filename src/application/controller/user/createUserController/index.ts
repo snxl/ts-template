@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 
-import CreateUserSchema from '../createUserSchema';
+import CreateUserSchema from './createUserSchema';
 
 class User {
     async store(req: Request, res: Response): Promise<Response> {
