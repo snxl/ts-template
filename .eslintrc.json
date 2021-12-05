@@ -64,7 +64,8 @@
         "prettier/prettier": "error",
         "no-new": "off",
         "@typescript-eslint/no-explicit-any": "off",
-        "no-restricted-syntax":"off"
+        "no-restricted-syntax":"off",
+        "no-await-in-loop": "off"
     },
     "settings": {
         "import/resolver": {

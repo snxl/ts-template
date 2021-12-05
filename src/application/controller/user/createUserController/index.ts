@@ -8,7 +8,8 @@ import CreateUserSchema from './createUserSchema';
 
 class User {
     async store(req: Request, res: Response): Promise<Response> {
-        const schema = new CreateUserSchema(req.body);
+        const schema = new CreateUserSchema(req.body, new UserRepoImpl());
+        await schema.validate();
 
         if (!schema.isValid()) {
             return res.status(400).json({ error: schema.getErrors() });

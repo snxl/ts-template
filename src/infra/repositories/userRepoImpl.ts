@@ -21,4 +21,12 @@ export default class UserRepoImpl implements IUserRepo {
     public async findAll(): Promise<User[]> {
         return this.user.find();
     }
+
+    public async findOne(email: string): Promise<User | undefined> {
+        return this.user.findOne({
+            where: {
+                email,
+            },
+        });
+    }
 }
