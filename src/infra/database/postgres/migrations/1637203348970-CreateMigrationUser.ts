@@ -4,11 +4,13 @@ export class CreateMigrationUser1637203348970 implements MigrationInterface {
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createTable(
             new Table({
-                name: 'users',
+                name: 'user',
                 columns: [
                     {
                         name: 'id',
-                        type: 'int',
+                        type: 'integer',
+                        isGenerated: true,
+                        generationStrategy: 'increment',
                         isPrimary: true,
                     },
                     {
@@ -17,7 +19,22 @@ export class CreateMigrationUser1637203348970 implements MigrationInterface {
                         isNullable: false,
                     },
                     {
+                        name: 'email',
+                        type: 'varchar',
+                        isNullable: false,
+                    },
+                    {
+                        name: 'password',
+                        type: 'varchar',
+                        isNullable: false,
+                    },
+                    {
                         name: 'created_at',
+                        type: 'timestamp',
+                        default: 'now()',
+                    },
+                    {
+                        name: 'updated_at',
                         type: 'timestamp',
                         default: 'now()',
                     },

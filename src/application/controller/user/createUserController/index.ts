@@ -1,5 +1,9 @@
 import { Request, Response } from 'express';
 
+import CreateUserImpl from '@src/domain/usecases/user/createUser/createUserImpl';
+import BCryptHashClient from '@src/infra/client/hashClient/bcryptHashClient';
+import UserRepoImpl from '@src/infra/repositories/userRepoImpl';
+
 import CreateUserSchema from './createUserSchema';
 
 class User {
@@ -10,7 +14,15 @@ class User {
             return res.status(400).json({ error: schema.getErrors() });
         }
 
-        return res.status(200).json({ status: 'ok' });
+        const createUser = new CreateUserImpl(new UserRepoImpl(), new BCryptHashClient());
+
+        const userResult = await createUser.run({
+            name: req.body.name,
+            email: req.body.email,
+            password: req.body.password,
+        });
+
+        return res.status(200).json(userResult);
     }
 }
 

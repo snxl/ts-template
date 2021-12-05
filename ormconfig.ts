@@ -11,5 +11,6 @@ export default (() => {
             entitiesDir: './src/infra/database/postgres/entities',
             migrationsDir: './src/infra/database/postgres/migrations',
         },
+        synchronize: true,
     };
 })();

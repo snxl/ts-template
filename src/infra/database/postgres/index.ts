@@ -1,3 +1,5 @@
 import { createConnection } from 'typeorm';
 
-createConnection();
+createConnection().then(() => {
+    process.stdout.write(`\ndatabase connect\n`);
+});
