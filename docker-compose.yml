@@ -40,7 +40,9 @@ services:
             - MONGO_INITDB_ROOT_PASSWORD=${MONGO_PASSWORD}
 
     app:
-        build: .
+        build:
+            context: .
+            dockerfile: Dockerfile.dev
         command: ["yarn", "dev"]
         container_name: node_service
         ports:
