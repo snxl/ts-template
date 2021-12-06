@@ -43,6 +43,7 @@ services:
         build:
             context: .
             dockerfile: Dockerfile.dev
+        image: docker/node
         command: ["yarn", "dev"]
         container_name: node_service
         ports:

@@ -44,3 +44,9 @@ bash:
 
 remove-images:
 	docker system prune -a --volumes
+
+.PHONY: type-logging
+
+type-logging:
+	docker inspect -f '{{.HostConfig.LogConfig.Type}}' d9e79609202e
+#<CONTAINER_ID>
