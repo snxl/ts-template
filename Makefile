@@ -25,6 +25,11 @@ down:
 logs:
 	docker-compose logs -f
 
+.PHONY: generate-logs
+
+generate-logs:
+	docker-compose logs --no-color --tail=5000 app > logs.txt
+
 .PHONY: bash
 
 bash:
