@@ -22,7 +22,12 @@ down:
 
 .PHONY: logs
 
-logs:
+log:
+	docker-compose logs -f app
+
+.PHONY: all-logs
+
+all-logs:
 	docker-compose logs -f
 
 .PHONY: generate-logs
