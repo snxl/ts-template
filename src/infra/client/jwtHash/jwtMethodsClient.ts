@@ -5,7 +5,7 @@ import IPayloadTokenRepository from '@src/domain/repositories/IPayloadTokenRepos
 import config from '@src/shared/config/keys/index';
 
 export default class JsonWebToken implements IJsonWebToken {
-    public async createPayload(payload: IPayloadTokenRepository): Promise<string> {
+    public async createPayload(payload: IPayloadTokenRepository): Promise<string | Error> {
         return new Promise((resolve, reject) => {
             jwt.sign(payload, config.SECRET_TOKEN, { expiresIn: '15min' }, (err, token) => {
                 if (err) return reject(err);
@@ -13,7 +13,7 @@ export default class JsonWebToken implements IJsonWebToken {
             });
         });
     }
-    public async getPayload(token: string): Promise<IPayloadTokenRepository> {
+    public async getPayload(token: string): Promise<IPayloadTokenRepository | Error> {
         return new Promise((resolve, reject) => {
             jwt.verify(token, config.SECRET_TOKEN, (err: Error, payload: IPayloadTokenRepository) => {
                 if (err) return reject(err);
