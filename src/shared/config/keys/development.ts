@@ -5,4 +5,5 @@ export default {
     pid: process.pid,
     port: process.env.PORT,
     port_tls: process.env.PORT_TLS,
+    SECRET_TOKEN: 'e120d1b83441e286dccee21fd1c696c7',
 };

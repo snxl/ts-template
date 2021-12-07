@@ -5,4 +5,5 @@ export default interface IEnvs {
     pid: number;
     port: string;
     port_tls: string;
+    SECRET_TOKEN: string;
 }
