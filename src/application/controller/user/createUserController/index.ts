@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 
 import CreateUserImpl from '@src/domain/usecases/user/createUser/createUserImpl';
 import BCryptHashClient from '@src/infra/client/hashClient/bcryptHashClient';
+import JsonWebToken from '@src/infra/client/jwtHash/jwtMethodsClient';
 import UserRepoImpl from '@src/infra/repositories/userRepoImpl';
 
 import CreateUserSchema from './createUserSchema';
@@ -15,7 +16,7 @@ class User {
             return res.status(400).json({ error: schema.getErrors() });
         }
 
-        const createUser = new CreateUserImpl(new UserRepoImpl(), new BCryptHashClient());
+        const createUser = new CreateUserImpl(new UserRepoImpl(), new BCryptHashClient(), new JsonWebToken());
 
         const userResult = await createUser.run({
             name: req.body.name,

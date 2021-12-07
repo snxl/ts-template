@@ -58,8 +58,8 @@ class CreateUserSchema extends BaseSchema {
         }
     }
 
-    private async validateEmail(email: string): Promise<boolean> {
-        return !!this.userValidationImpl.findOne(email);
+    private async validateEmail(email: string): Promise<null | User> {
+        return this.userValidationImpl.findOne(email);
     }
 }
 

@@ -4,8 +4,12 @@ export interface ICreateUserInput {
     password: string;
 }
 
-export interface ICreateUserOutput {
+export interface IUserOutput {
     id: number;
     name: string;
     email: string;
+}
+
+export interface ICreateUserOutput {
+    token: string;
 }
