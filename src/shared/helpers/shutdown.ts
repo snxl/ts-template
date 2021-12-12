@@ -3,7 +3,7 @@ import { logger } from './pinoLogger';
 
 export default function shutdown(signal: string): void {
     if (config.NODE_ENV !== 'production') {
-        process.stdout.write(`\nexiting\n`);
+        logger.info(`exiting\n`);
         process.exit(0);
     }
 
@@ -12,7 +12,7 @@ export default function shutdown(signal: string): void {
     logger.info(`[shutdown] shutting down in ${timeOut}ms | signal: ${signal}`);
 
     setTimeout(() => {
-        process.stdout.write(`waited ${timeOut}ms, exiting`);
+        logger.info(`waited ${timeOut}ms, exiting\n`);
         process.exit(0);
     }, timeOut);
 }
