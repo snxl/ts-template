@@ -22,7 +22,7 @@
     "node": ">=16.x"
   },
   "scripts": {
-    "dev": "ts-node-dev --inspect --poll --transpile-only --ignore-watch node_modules --respawn src/application/main/www.ts",
+    "dev": "ts-node-dev --inspect=0.0.0.0:7001 --poll --transpile-only --ignore-watch node_modules --respawn src/application/main/www.ts",
     "test": "jest",
     "typeorm": "ts-node-dev ./node_modules/typeorm/cli"
   },

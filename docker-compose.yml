@@ -43,12 +43,14 @@ services:
         build:
             context: .
             dockerfile: Dockerfile.dev
+            target: dev
         image: docker/node
-        command: ["yarn", "dev"]
+        command: ["yarn", "dev" ]
         container_name: node_service
         ports:
             - "3000:${PORT_TLS}"
             - "5000:${PORT}"
+            - "9229:9229"
         volumes:
             - .:/usr/app
             - /usr/app/node_modules

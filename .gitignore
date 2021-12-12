@@ -2,3 +2,4 @@ node_modules
 coverage
 .env
 logs.txt
+yarn-error.log

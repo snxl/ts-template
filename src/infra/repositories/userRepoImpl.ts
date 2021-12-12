@@ -15,7 +15,6 @@ export default class UserRepoImpl implements IUserRepo {
         const createUser = this.user.create(user);
 
         await this.user.save(createUser);
-        console.log(createUser);
         return createUser;
     }
     public async findAll(): Promise<User[]> {

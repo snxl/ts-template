@@ -1,4 +1,4 @@
-FROM node:16-alpine
+FROM node:16-alpine AS prod
 
 WORKDIR /usr/app
 
@@ -15,6 +15,6 @@ RUN yarn
 
 COPY . .
 
-EXPOSE 8080 465 80 5050 5000 3000
+EXPOSE 8080 465 80 5050 5000 3000 9229
 
 CMD ["yarn","dev"]
