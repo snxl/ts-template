@@ -1,5 +1,7 @@
 import { createClient } from 'redis';
 
+import { logger } from '@src/shared/helpers/pinoLogger';
+
 import config from '../../../shared/config/keys';
 
 (async () => {
@@ -8,8 +10,8 @@ import config from '../../../shared/config/keys';
     });
 
     setTimeout(async () => {
-        client.on('error', (err) => process.stdout.write(`Redis Client Error: ${err}\n`));
-        client.on('connect', () => process.stdout.write(`Redis connect in: ${config.pid}\n`));
+        client.on('error', (err) => logger.info(`Redis Client Error: ${err}\n`));
+        client.on('connect', () => logger.info(`Redis connect in: ${config.pid}\n`));
 
         await client.connect();
     }, 500);

@@ -1,4 +1,5 @@
 import config from '../config/keys/index';
+import { logger } from './pinoLogger';
 
 export default function shutdown(signal: string): void {
     if (config.NODE_ENV !== 'production') {
@@ -8,7 +9,7 @@ export default function shutdown(signal: string): void {
 
     const timeOut = 25 * 10000;
 
-    process.stdout.write(`[shutdown] shutting down in ${timeOut}ms | signal: ${signal}`);
+    logger.info(`[shutdown] shutting down in ${timeOut}ms | signal: ${signal}`);
 
     setTimeout(() => {
         process.stdout.write(`waited ${timeOut}ms, exiting`);

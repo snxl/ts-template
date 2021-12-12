@@ -10,6 +10,7 @@ import path from 'path';
 
 import { App } from '@src/application/main/app';
 import config from '@src/shared/config/keys';
+import { logger } from '@src/shared/helpers/pinoLogger';
 import shutdown from '@src/shared/helpers/shutdown';
 
 class ServerBin {
@@ -47,8 +48,8 @@ class ServerBin {
         if (cluster.isPrimary) {
             const number_of_cpus = os.cpus().length;
 
-            process.stdout.write(`\nMaster ${config.pid} is running\n`);
-            process.stdout.write(`\nForking Server for ${number_of_cpus} CPUs\n`);
+            logger.info(`Master ${config.pid} is running\n`);
+            logger.info(`Forking Server for ${number_of_cpus} CPUs\n`);
 
             for (let index = 0; index < number_of_cpus; index++) {
                 cluster.fork();
@@ -56,7 +57,7 @@ class ServerBin {
 
             cluster.on('exit', (worker, code) => {
                 if (code !== 0 && !worker.exitedAfterDisconnect) {
-                    process.stdout.write(`\nWorker ${worker.process.pid} died\n`);
+                    logger.info(`Worker ${worker.process.pid} died\n`);
                     cluster.fork();
                 }
             });
@@ -66,15 +67,17 @@ class ServerBin {
     }
 
     private listner() {
-        process.stdout.write(`\nProcess id: ${config.pid}\n`);
+        logger.info(`Process id: ${config.pid}\n`);
 
         setTimeout(() => {
-            this.server.listen(this.port, () =>
-                process.stdout.write(`\nSERVER HTTP RUNNING IN PORT: ${this.port}\nhttp://localhost:${this.port} \n`)
-            );
-            this.serverSsl.listen(this.portTls, () =>
-                process.stdout.write(`\nSERVER HTTPS RUNNING IN PORT: ${this.portTls}\nhttps://localhost:${this.portTls}\n`)
-            );
+            this.server.listen(this.port, () => {
+                logger.info(`SERVER HTTP RUNNING IN PORT: ${this.port}`);
+                logger.info(`http://localhost:${this.port}\n`);
+            });
+            this.serverSsl.listen(this.portTls, () => {
+                logger.info(`SERVER HTTPS RUNNING IN PORT: ${this.portTls}`);
+                logger.info(`https://localhost:${this.portTls}\n`);
+            });
         }, 1000);
     }
 

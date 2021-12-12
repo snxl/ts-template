@@ -1,5 +1,7 @@
 import { createConnection } from 'typeorm';
 
+import { logger } from '@src/shared/helpers/pinoLogger';
+
 createConnection().then(() => {
-    process.stdout.write(`\ndatabase connect\n`);
+    logger.info(`database connect\n`);
 });

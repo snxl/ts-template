@@ -6,4 +6,5 @@ export default {
     port: process.env.PORT,
     port_tls: process.env.PORT_TLS,
     SECRET_TOKEN: process.env.KEY_TOKEN,
+    LOG_LEVEL: process.env.LOG_LEVEL,
 };

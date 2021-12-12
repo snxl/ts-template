@@ -6,4 +6,5 @@ export default interface IEnvs {
     port: string;
     port_tls: string;
     SECRET_TOKEN: string;
+    LOG_LEVEL: string;
 }
