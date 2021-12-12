@@ -9,8 +9,7 @@ import CreateUserSchema from './createUserSchema';
 
 class User {
     async store(req: Request, res: Response): Promise<Response> {
-        const schema = new CreateUserSchema(req.body, new UserRepoImpl());
-        await schema.validate();
+        const schema = new CreateUserSchema(req.body);
 
         if (!schema.isValid()) {
             return res.status(400).json({ error: schema.getErrors() });
@@ -22,9 +21,10 @@ class User {
             name: req.body.name,
             email: req.body.email,
             password: req.body.password,
+            passwordConfirm: req.body.passwordConfirm,
         });
 
-        return res.status(200).json(userResult);
+        return (userResult.failure && res.status(400).json(userResult)) || res.status(200).json(userResult);
     }
 }
 

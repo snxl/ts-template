@@ -2,6 +2,7 @@ export interface ICreateUserInput {
     name: string;
     email: string;
     password: string;
+    passwordConfirm: string;
 }
 
 export interface IUserOutput {
@@ -12,4 +13,5 @@ export interface IUserOutput {
 
 export interface ICreateUserOutput {
     token: string;
+    failure: boolean;
 }
